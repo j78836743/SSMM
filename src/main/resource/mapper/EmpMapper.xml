@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etoak.mapper.EmpMapper">
+
+	<sql id="emp-columns">
+		id,ename,eno,password,job,salary,did,hiredate
+	</sql>
+
+	<update id="update" parameterType="emp">
+		update
+		emp
+		set
+		ename = #{ename},
+		job = #{job},
+		salary = #{salary}
+		<if test="did != null">
+			, did = #{did}
+		</if>
+		where
+		id = #{id}
+	</update>
+
+
+	<insert id="add" parameterType="emp">
+		insert into
+		emp(<include refid="emp-columns"></include>)
+		values(#{id},#{ename},#{eno},#{password},
+		#{job},#{salary},#{did},#{hiredate})
+	</insert>
+
+	<select id="getEno"
+			parameterType="java.lang.String"
+			resultType="emp">
+		select
+		<include refid="emp-columns"></include>
+		from
+		emp
+		where
+		eno = #{eno}
+	</select>
+
+
+	<select id="query" parameterType="emp"
+			resultType="emp">
+
+		select
+		a.*,b.dname as dname
+		from
+		emp a
+		left join
+		dept b
+		on
+		a.did = b.id
+
+		<where>
+			<if test="ename != null and ename!= ''">
+				ename like '%${ename}%'
+			</if>
+
+			<if test="did != null">
+				and did = #{did}
+			</if>
+
+			<if test="startTime != null">
+				and hiredate >= #{startTime}
+			</if>
+
+			<if test="endTime != null">
+				and hiredate <![CDATA[<=]]> #{endTime}
+			</if>
+		</where>
+
+	</select>
+
+</mapper>
