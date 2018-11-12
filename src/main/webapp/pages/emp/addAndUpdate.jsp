@@ -38,12 +38,18 @@
 								label: 'xzzl',
 								value: '行政助理'
 							}]"  /></td>				
-			</tr>	
-			
+			</tr>
+
 			<tr>
-				<td>员工工资</td>
-				<td><input " name="salary" class="easyui-textbox" data-options="required:true,width:180" /></td>				
-			</tr>		
+				<td>员工薪资：</td>
+				<td>
+					<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" name="add" id="add"></a>
+					<input name="salary" value="${e.salary }"
+						   class="easyui-numberbox"
+						   data-options="required:true,width:180" />
+					<a class="easyui-linkbutton" data-options="iconCls:'icon-remove'" name="remove" id="remove"></a>
+				</td>
+			</tr>
 			
 			<tr>
 				<td>员工部门</td>
