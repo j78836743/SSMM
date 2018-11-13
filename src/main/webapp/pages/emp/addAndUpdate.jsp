@@ -43,11 +43,18 @@
 			<tr>
 				<td>员工薪资：</td>
 				<td>
-					<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" name="add" id="add"></a>
-					<input name="salary" value="${e.salary }"
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',onClick:function(){
+					var i = $('#salary').numberbox('getValue');
+					$('#salary').numberbox('setValue',parseInt(i)-200);
+					}" ></a>
+					<input name="salary" id="salary"
 						   class="easyui-numberbox"
 						   data-options="required:true,width:180" />
-					<a class="easyui-linkbutton" data-options="iconCls:'icon-remove'" name="remove" id="remove"></a>
+					<a href="javascript:void(0)" class="easyui-linkbutton"
+					   data-options="iconCls:'icon-add',onClick:function(){
+					var i = $('#salary').numberbox('getValue');
+					$('#salary').numberbox('setValue',parseInt(i)+200);
+					}" ></a>
 				</td>
 			</tr>
 			
